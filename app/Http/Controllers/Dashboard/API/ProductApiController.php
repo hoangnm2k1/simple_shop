@@ -51,20 +51,16 @@ class ProductApiController extends Controller {
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->category_id = $request->input('category_id');
-        Log::info($request->file('img_url'));
 
         if($request->hasFile('img_url')) {
             $image = $request->file('img_url');
             $imageName = 'image_' . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('dashboard/uploads'), $imageName);
             $product->img_url = $imageName;
-        } else {
-            $product->img_url = 'image_default.jpg';
         }
 
-        $product->update($product->toArray());
-
-
+        // $product->update($product->toArray());
+        $product->save();
         return response()->json($product);
     }
     public function destroy($id)

@@ -4,10 +4,6 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        {{-- <h1 class="h3 mb-2 text-gray-800">List</h1> --}}
-        {{-- <a href="{{route('product.showCreateProduct')}}">
-            <div class="btn btn-success mb-3">Create</div>
-        </a> --}}
         <div class="btn btn-success mb-3" id="btnCreate">Create</div>
 
         <!-- DataTales Example -->
@@ -80,8 +76,6 @@
                     <input type="file" class="form-control" id="txtImage" placeholder="Enter your price" />
                     <label>Category</label>
                     <select id="txtIdCategory" class="form-control">
-                        {{-- <option value="1">Tablet</option>
-                        <option value="2">Phone</option> --}}
                     </select>
 
                 </div>
@@ -133,7 +127,7 @@
                             <th scope="row">${p.id}</th>
                             <td>${p.name}</td>
                             <td>${p.price}</td>
-                            <td><img src="http://127.0.0.1:8000/dashboard/uploads/${p.img_url}"></td>
+                            <td><img src="/dashboard/uploads/${p.img_url}"></td>
                             <td>${p.category_name}</td>
                             <td>
                                 <button type="button" class="btn btn-danger btnUpdate" data-id="${p.id}">Update</button>
@@ -163,25 +157,25 @@
             handleCreate();
         });
 
-        async function handleResumeInput(remoteResumeURL) {
-            const designFile = await createFile(remoteResumeURL);
+        // async function handleResumeInput(remoteResumeURL) {
+        //     const designFile = await createFile(remoteResumeURL);
 
-            const input = document.querySelector('#txtImage');
-            const dt = new DataTransfer();
-            dt.items.add(designFile);
-            input.files = dt.files;
+        //     const input = document.querySelector('#txtImage');
+        //     const dt = new DataTransfer();
+        //     dt.items.add(designFile);
+        //     input.files = dt.files;
 
-            const event = new Event("change", {
-                bubbles: !0, //đặt thành true
-            });
-            input.dispatchEvent(event);
-        }
-        async function createFile(urlImage) {
-            let response = await fetch(urlImage);
-            let fileName = urlImage.substring(urlImage.lastIndexOf('/') + 1);
-            let data = await response.blob();
-            return new File([data], fileName);
-        }
+        //     const event = new Event("change", {
+        //         bubbles: !0, //đặt thành true
+        //     });
+        //     input.dispatchEvent(event);
+        // }
+        // async function createFile(urlImage) {
+        //     let response = await fetch(urlImage);
+        //     let fileName = urlImage.substring(urlImage.lastIndexOf('/') + 1);
+        //     let data = await response.blob();
+        //     return new File([data], fileName);
+        // }
 
         function handleUpdate(id) {
             $("#myModal").modal("show");
@@ -195,13 +189,10 @@
                     frmCreUpdate.data.name = data.name;
                     frmCreUpdate.data.price = data.price;
                     frmCreUpdate.data.img_url = data.img_url;
-
-                    console.log(frmCreUpdate.data.img_url);
-
                     $("#txtName").val(frmCreUpdate.data.name);
                     $("#txtPrice").val(frmCreUpdate.data.price);
 
-                    handleResumeInput(data.img_url);
+                    // handleResumeInput(data.img_url);
 
                 });
 
@@ -272,10 +263,9 @@
                         let idCategory = $("#txtIdCategory").val();
                         let formData = new FormData();
                         let fileInput = $("#txtImage")[0].files[0];
-                        if(!fileInput){
-                            data.data.img_url = 'image_default.jpg';
+                        if(fileInput){
+                            formData.append('img_url', fileInput);
                         }
-                        formData.append('img_url', fileInput);
                         formData.append('name', name);
                         formData.append('price', price);
                         formData.append('category_id', idCategory);

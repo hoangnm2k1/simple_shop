@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="product_content">
                                     <span class="product_price">${p.price}</span>
-                                    <h3 class="product_title"><a href="single-product.html">${p.name}</a></h3>
+                                    <h3 class="product_title"><a href="javascript:">${p.name}</a></h3>
                                 </div>
                                 <div class="product_info">
                                     <ul>

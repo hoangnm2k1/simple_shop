@@ -304,12 +304,12 @@
         })
         .then(response => response.json())
         .then(data => {
-                fetchCartData();
-                alertify.success("Cập nhật thành công!");
-                updateCartTotal();
-                var price = parseFloat($("#price-" + id).text().replace(/\./g, ''));
-                var newTotal = price * quantity;
-                $("#total-" + id).text(newTotal.toLocaleString());
+            fetchCartData();
+            alertify.success("Cập nhật thành công!");
+            updateCartTotal();
+            var price = parseFloat($("#price-" + id).text().replace(/\./g, ''));
+            var newTotal = price * quantity;
+            $("#total-" + id).text(newTotal.toLocaleString());
             }
         )
         .catch(error => {
@@ -317,7 +317,7 @@
         });
 }
 
-  function updateAll() {
+function updateAll() {
     var list = [];
         $("table tbody tr td").each(function() {
             $(this).find("input").each(function() {
@@ -345,7 +345,7 @@
     var list = [];
         $("table tbody tr td").each(function() {
             $(this).find("input").each(function() {
-                var element = { key: $(this).data("id"), value: $(this).val() };
+                var element = $(this).data("id");
                 list.push(element);
             })
         });
@@ -363,6 +363,20 @@
             getListCart();
         })
  }
+
+/*
+function deleteAll() {
+    $.ajax({
+        url: "list-cart-delete-all",
+        type: "GET",
+    }).done(function() {
+        fetchCartData();
+        alertify.success("Đã trả lại hết hàng");
+        updateCartTotal();
+        getListCart();
+    });
+}
+*/
     document.getElementById('update_all').addEventListener('click', function(event) {
     event.preventDefault();
     updateAll();

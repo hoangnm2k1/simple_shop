@@ -97,11 +97,12 @@ class ListCartApiController extends Controller
 
     public function deleteAll(Request $request) {
         $data = $request->data;
-        foreach ($data as $item) {
+        foreach ($data as $id) {
             $oldCart = Session('Cart') ? Session('Cart') : null;
             $newCart = new Cart($oldCart);
-            $newCart->deleteItemCart($item['key']);
+            $newCart->deleteItemCart($id);
             $request->session()->put('Cart', $newCart);
         }
+//        $request->session()->forget('Cart');
     }
 }
