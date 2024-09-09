@@ -157,25 +157,6 @@
             handleCreate();
         });
 
-        // async function handleResumeInput(remoteResumeURL) {
-        //     const designFile = await createFile(remoteResumeURL);
-
-        //     const input = document.querySelector('#txtImage');
-        //     const dt = new DataTransfer();
-        //     dt.items.add(designFile);
-        //     input.files = dt.files;
-
-        //     const event = new Event("change", {
-        //         bubbles: !0, //đặt thành true
-        //     });
-        //     input.dispatchEvent(event);
-        // }
-        // async function createFile(urlImage) {
-        //     let response = await fetch(urlImage);
-        //     let fileName = urlImage.substring(urlImage.lastIndexOf('/') + 1);
-        //     let data = await response.blob();
-        //     return new File([data], fileName);
-        // }
 
         function handleUpdate(id) {
             $("#myModal").modal("show");
@@ -191,9 +172,6 @@
                     frmCreUpdate.data.img_url = data.img_url;
                     $("#txtName").val(frmCreUpdate.data.name);
                     $("#txtPrice").val(frmCreUpdate.data.price);
-
-                    // handleResumeInput(data.img_url);
-
                 });
 
             fetch("http://127.0.0.1:8000/api/category/")
